@@ -1,0 +1,90 @@
+﻿<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+
+<head>
+	<meta content="text/html; charset=utf-8" http-equiv="Content-Type" />
+	<title>Meμory! - By Christos Tanailidis</title>
+	<link rel="shortcut icon" href="images/faviconblackflash32.png"/>
+	<style>
+		html{
+			height:100%;
+		}
+		body{
+			background-color:black;
+			background-position:center;
+			background-image:url('backMenu.png')
+	}
+		#maincontent{
+			background-color:black;
+			width:45%;
+			opacity:0.9;
+			color:white;
+			font-size:33px;
+			text-align:left;
+			margin-top:10px;
+			box-shadow: 5px 5px 20px black;
+		}
+		#maincontent h1{
+			background-color:black;
+			opacity:0.9;
+			color:white;
+			font-size:36px;
+		}
+		h1{
+			font-family:"Courier New", Courier, monospace;
+			text-align:center;
+			color:white;
+		}
+		div{
+			margin-right: auto;
+			margin-left: auto;
+		    width: 50%;
+		    text-align:center;
+			font-size:40px;
+			font-family:"Courier New", Courier, monospace;
+			padding:10px;
+		}
+		div button{
+			margin-right: auto;
+			margin-left: auto;
+			border: 1px solid black;
+			padding:0px;
+			height:20%;
+			width:50%;
+			color:white;
+			font-size:2.3vw;
+			font-family:"Courier New", Courier, monospace;
+			letter-spacing: 2px;
+		}
+	</style>
+		
+	<script>
+		var hoverSound = new Audio('right.wav');
+		function ShowEasy(){
+			hoverSound.play();
+			document.getElementById('body').style.backgroundImage="url('backMenuEasy.png')";
+		}
+		function ShowMedium(){
+			hoverSound.play();
+			document.getElementById('body').style.backgroundImage="url('backMenuMedium.png')";
+		}
+		function ShowHard(){
+			hoverSound.play();
+			document.getElementById('body').style.backgroundImage="url('backMenuHard.png')";
+		}
+		function Clear(){
+			document.getElementById('body').style.backgroundImage="";
+		}
+
+	</script>
+</head>
+
+<body id="body">
+	<h1>Chose Difficulty</h1><br/><div>
+	<button style="background-color:green" onclick="window.open('./Dificulty/Easy.html')" onmouseover="ShowEasy()" onmouseout="Clear()">Easy 4x4</button><br/>
+	<button style="background-color:orange" onclick="window.open('./Dificulty/Medium.html')" onmouseover="ShowMedium()"onmouseout="Clear()">Medium 5x5</button><br/>
+	<button style="background-color:red" onclick="window.open('./Dificulty/Hard.html')" onmouseover="ShowHard()"onmouseout="Clear()">Hard 6x6</button></div>
+	<div id="maincontent"><h1>Instructions:</h1>Right after chosing dificulty,<ul><li>You can start by pressing the <b>"Start"</b> button.</li><li>You have <b>5 seconds memorizing</b> all key-icons.</li><li>After 5 seconds all icons are hidden.</li><li>At that point you can start selecting/clicking the hidden icons</li><li>If you make <b>3 wrong clicks you lose.</b></li><li>You can ask for help <b>just for once</b> by clicking the <b>"Hint"</b> button.</li>That's all Good Luck!</ul></p></div>
+</body>
+
+</html>

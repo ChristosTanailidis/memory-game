@@ -1,0 +1,437 @@
+﻿<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+
+<head>
+	<meta content="text/html; charset=utf-8" http-equiv="Content-Type" />
+	<link rel="shortcut icon" href="../images/faviconblackflash32.png"/>
+	<title>Meμory!</title>
+	<style>
+		#firstnote{
+			position:fixed;
+			left:auto;
+			right:auto;
+			background-color:#0066FF;
+			height:95%;
+			width:99.1%;
+			z-index:10;
+			font-size:60px;
+			font-family:"Courier New", Courier, monospace;
+			color:white;
+			text-align:center;
+			background-image:url('justiceleagueBack.png');
+			background-position:center;
+			background-repeat:no-repeat;
+			box-shadow: 5px 5px 20px black;
+		}
+		html{
+			height:100%;
+		}
+		body{
+			height:98%;
+			background-size:100%;
+			background-image:url('justiceleagueBack.png');
+			background-repeat:no-repeat;
+			background-color:black;
+			background-position:center;
+		}
+		#timer1{
+			color:white;
+			font-weight:bold;
+			margin-right: auto;
+			margin-left: auto;
+		    width: 50%;
+		    padding: 0px;
+		    text-align:center;
+			font-size:40px;
+			font-family:"Courier New", Courier, monospace;
+			padding:10px;
+			color:yellow;
+		}
+		#keyimg{
+			background-color:red;
+			position:fixed;
+			left:9px;
+			top:17px;
+			color:white;
+		    padding: 0px;
+		    margin:0px;
+		    text-align:left;
+			font-size:35px;
+			font-family:"Courier New", Courier, monospace;
+		}
+		#footer{
+			position:fixed;
+			right:10px;
+			bottom:2px;
+			font-weight:bold;
+			color:white;
+		    padding: 0px;
+		    text-align:center;
+			font-size:15px;
+			font-family:"Courier New", Courier, monospace;
+			padding-top:3px;
+		}
+		button{
+			height:46px;
+			margin-right: auto;
+			margin-left: auto;
+			font-size:20px;
+			font-family:"Courier New", Courier, monospace;
+			display: inline-block;
+			padding: 10px 25px;
+			cursor: pointer;
+			text-align: center;
+			text-decoration: none;
+			outline: none;
+			color: #fff;
+			background-color:#FF0909;
+			border: none;
+			border-radius: 15px;
+			box-shadow: 0 9px #999;
+		}
+		button:hover {
+			background-color:#FF3737
+		}
+
+		button:active {
+		  background-color: #FF0909;
+		  box-shadow: 0 5px #666;
+		  transform: translateY(4px);
+		}
+		table{
+			opacity: 0;
+			width:100%;
+			border-spacing:1px;
+			background-color:black;
+			box-shadow: 5px 5px 20px black;
+		}
+		table tr td{
+			height:140px;
+			background-color:white;
+			font:30px;
+			background-repeat:no-repeat;
+			background-position:center;
+		}
+	</style>
+	<script>
+		var rnd, rndIcon;
+		var keyIcon;
+		var keyImgName="";
+		var KeyIconLength=0;
+		var keyIconPath;
+		var count=5;
+		var y,x;
+		var tmr1, tmr2 ;
+		var img1 = 'batman.png'
+		var img2 = 'superman.png'
+		var img3 = 'flash.png'
+		var img4 = 'wonderwoman.png'
+		var img5 = 'greenlantern.png'
+		var imgC = [0,0,0,0,0];
+		var maxImg;
+		var maxImgC=0;
+		var audioStart = new Audio('start.wav');
+		function Start(){	
+			audioStart.play();
+			tmr3 = window.setInterval(Blink,"500");
+			document.getElementById('timer1').innerHTML=count;
+			x=document.getElementById('table1');
+			x.style.opacity="1";
+			for (var i=0;i<x.rows.length;i++){
+				for (var j=0; j<x.rows[i].cells.length; j++){
+					rnd = Math.round(Math.random() * 4);
+					if (rnd==0){
+						x.rows[i].cells[j].style.backgroundImage="url("+img1+")";
+						//x.rows[i].cells[j].style.backgroundSize ="100% 100%";
+						y = x.rows[i].cells[j];
+						y.setAttribute("id","img1");
+						imgC[0]++;
+					}	
+					else if (rnd==1){
+						x.rows[i].cells[j].style.backgroundImage="url("+img2+")";
+						//x.rows[i].cells[j].style.backgroundSize ="100% 100%";
+						y = x.rows[i].cells[j];
+						y.setAttribute("id","img2");
+						imgC[1]++;
+					}
+					else if (rnd==2){
+						x.rows[i].cells[j].style.backgroundImage="url("+img3+")";
+						//x.rows[i].cells[j].style.backgroundSize ="100% 100%";
+						y = x.rows[i].cells[j];
+						y.setAttribute("id","img3");
+						imgC[2]++;
+					}
+					else if (rnd==3){
+						x.rows[i].cells[j].style.backgroundImage="url("+img4+")";
+						//x.rows[i].cells[j].style.backgroundSize ="100% 100%";
+						y = x.rows[i].cells[j];
+						y.setAttribute("id","img4");
+						imgC[3]++;
+					}
+					else {
+						x.rows[i].cells[j].style.backgroundImage="url("+img5+")";
+						//x.rows[i].cells[j].style.backgroundSize ="0100% 100%";
+						y = x.rows[i].cells[j];
+						y.setAttribute("id","img5");
+						imgC[4]++;
+					}
+				}
+			}
+			
+			for (var i=0; i<imgC.length;i++){
+				if (imgC[i]>maxImgC){
+					maxImgC=imgC[i];
+					maxImg=i;
+				}
+			}
+			
+			rnd2 = maxImg;
+			if (rnd2==0){ 
+				keyIcon="img1";
+				keyIconPath=img1;
+				keyImgName="Batman"
+			}
+			else if (rnd2==1){
+				keyIcon="img2";
+				keyIconPath=img2;
+				keyImgName="Superman"
+			}
+			else if (rnd2==2){
+				keyIcon="img3";
+				keyIconPath=img3;
+				keyImgName="Flash"
+			}
+			else if (rnd2==3){
+				keyIcon="img4";
+				keyIconPath=img4;
+				keyImgName="Wonder Woman"
+			}
+			else{
+				keyIcon="img5";
+				keyIconPath=img5;
+				keyImgName="Green Lantern"
+			}
+			
+			
+			for (var i=0;i<x.rows.length;i++){
+				for (var j=0; j<x.rows[i].cells.length; j++){
+					cellId = x.rows[i].cells[j].getAttribute('id');
+					if (cellId==keyIcon){
+						KeyIconLength++;
+					}
+				}
+			}
+			
+			
+			document.getElementById("keyimg").innerHTML="OBJECTIVE: Find all <b>"+keyImgName+"</b> icons";
+			
+			
+			tmr1 = window.setInterval(Hide,"5000");
+			tmr2 = window.setInterval(Timer,"1000");
+			
+		}
+		
+		
+		var beginBoolean=false;
+		var audioTime = new Audio('time.wav');
+		
+		var chng2=true;
+		function Timer(){
+			count--;
+			audioTime.play();
+			if (count>0){
+				document.getElementById('timer1').innerHTML=count;
+				if (chng2){
+					document.getElementById('timer1').style.color="red";
+					chng2=false;
+				}
+				else{
+					document.getElementById('timer1').style.color="yellow";
+					chng2=true;
+				}
+			}
+			else{
+				document.getElementById('timer1').innerHTML="<button id='hint' onclick='Hint()'>Hint</button>"
+				window.clearInterval(tmr2);
+				beginBoolean=true;
+			}
+			
+		}
+		
+		
+		function Hide(){
+			window.clearInterval(tmr1);
+			x=document.getElementById('table1');
+			x.style.opacity="0.90";
+			for (var i=0;i<x.rows.length;i++){
+				for (var j=0; j<x.rows[i].cells.length; j++){
+					x.rows[i].cells[j].style.backgroundColor="grey";
+					x.rows[i].cells[j].style.backgroundImage="";
+				}
+			}
+		}
+		
+		
+		var rightClicks=0;
+		var wrongClicks=0;
+		var points;
+		var audioRight = new Audio('right.wav');
+		var audioWrong = new Audio('wrong.wav');
+		var audioEnd = new Audio('end.wav');
+		
+		
+		function Click(e){
+			if (beginBoolean){
+				if (e.target.tagName=='TD'){
+					if (e.target.style.backgroundColor=="grey"){
+						var temp;
+						var cll = e.target.getAttribute('id');
+						if (cll==keyIcon){
+							rightClicks++;
+							e.target.style.backgroundImage="url("+keyIconPath+")";
+							if (rightClicks<KeyIconLength && wrongClicks<3){
+								audioRight.play();
+								e.target.style.backgroundColor="green";
+							}
+							else if (rightClicks==KeyIconLength){				
+								alert("You won!\nYour progress: "+Math.round(rightClicks/KeyIconLength*100)+"%");
+								e.target.style.backgroundColor="green";
+								audioEnd.play();
+								Filler();
+							}
+						}
+						else if (cll!=keyIcon){
+							wrongClicks++;
+							audioWrong.play();
+							if (wrongClicks<3){
+								points=rightClicks;
+								if (cll=='img1'){
+									e.target.style.backgroundImage="url("+img1+")";
+									e.target.style.backgroundColor="red";
+								}
+								else if (cll=='img2'){
+									e.target.style.backgroundImage="url("+img2+")";
+									e.target.style.backgroundColor="red";
+								}
+								else if (cll=='img3'){
+									e.target.style.backgroundImage="url("+img3+")";
+									e.target.style.backgroundColor="red";
+								}
+								else if (cll=='img4'){
+									e.target.style.backgroundImage="url("+img4+")";
+									e.target.style.backgroundColor="red";
+								}
+								else if (cll=='img5'){
+									e.target.style.backgroundImage="url("+img5+")";
+									e.target.style.backgroundColor="red";
+								}
+								
+							}
+							else{
+								alert("More than 3 wrong clicks have been made.\nYour progress: "+Math.round(rightClicks/KeyIconLength*100)+"%");
+								audioEnd.play();
+								Filler();
+							}
+						}
+					}
+				}
+			}
+		}
+		
+		
+		function Filler(){
+			for (var i=0;i<x.rows.length;i++){
+				for (var j=0; j<x.rows[i].cells.length; j++){
+					temp = x.rows[i].cells[j].getAttribute('id');
+					if (x.rows[i].cells[j].style.backgroundColor!="green"){
+						if (temp =='img1'){
+							x.rows[i].cells[j].style.backgroundImage="url("+img1+")";
+							x.rows[i].cells[j].style.backgroundColor="red";
+						}
+						else if (temp =='img2'){
+							x.rows[i].cells[j].style.backgroundImage="url("+img2+")";
+							x.rows[i].cells[j].style.backgroundColor="red";
+						}
+						else if (temp =='img3'){
+							x.rows[i].cells[j].style.backgroundImage="url("+img3+")";
+							x.rows[i].cells[j].style.backgroundColor="red";
+						}
+						else if (temp =='img4'){
+							x.rows[i].cells[j].style.backgroundImage="url("+img4+")";
+							x.rows[i].cells[j].style.backgroundColor="red";
+						}
+						else if (temp =='img5'){
+							x.rows[i].cells[j].style.backgroundImage="url("+img5+")";
+							x.rows[i].cells[j].style.backgroundColor="red";
+						}
+					}
+					if ((temp==keyIcon)&&(x.rows[i].cells[j].style.backgroundColor!="green")){
+						x.rows[i].cells[j].style.backgroundImage="url("+keyIconPath+")";
+						x.rows[i].cells[j].style.backgroundColor="grey";
+					}
+				}
+			}
+		}
+		
+		
+		var hintBollean=true;
+		
+		
+		function Hint(){
+			if (beginBoolean&&hintBollean){
+				alert("There are "+KeyIconLength+" "+keyImgName+" icons!");
+				hintBollean=false;
+			}
+			else{
+				alert("Hints can only been shown one time!")
+			}
+		}
+		
+		
+		var tmr3;
+		var chng = true;
+		var blickCounter=35;
+		
+		function Blink(){
+			blickCounter--;
+			if (blickCounter>0){
+				if (chng){
+					document.getElementById('keyimg').style.backgroundColor="yellow";
+					document.getElementById('keyimg').style.color="red";
+					chng=false;
+				}
+				else{
+					document.getElementById('keyimg').style.backgroundColor="red";
+					document.getElementById('keyimg').style.color="yellow";
+					chng=true;
+				}
+			}
+			else{
+				window.clearInterval(tmr3);
+			}
+		}
+		
+		
+		function Delete(){
+			var element = document.getElementById("firstnote");
+			element.outerHTML = "";
+			delete element;
+		}
+		
+	</script>
+</head>
+
+<body>
+	<p id="keyimg"></p><div id="timer1"><button onclick="Start()">Start</button></div>
+	<table id="table1" onclick="Click(event)">
+		<tr><td></td><td></td><td></td><td></td><td></td><td></td></tr>
+		<tr><td></td><td></td><td></td><td></td><td></td><td></td></tr>
+		<tr><td></td><td></td><td></td><td></td><td></td><td></td></tr>
+		<tr><td></td><td></td><td></td><td></td><td></td><td></td></tr>
+		<tr><td></td><td></td><td></td><td></td><td></td><td></td></tr>
+		<tr><td></td><td></td><td></td><td></td><td></td><td></td></tr>
+	</table>
+	<div id="footer"><p>Made by Chris Tanailidis</p></div>
+</body>
+
+</html>
